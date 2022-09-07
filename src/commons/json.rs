@@ -34,7 +34,7 @@ impl JsonCommons {
         }
 
         let key = keys.pop_front().unwrap();
-        let new_path = path.replace((&key.to_owned().add(".")), "");
+        let new_path = path.replace(&key.to_owned().add("."), "");
 
         if content.has_key(&key) && keys.len() > 0 {
             return self.get_path(&new_path, content[&key].to_owned());
