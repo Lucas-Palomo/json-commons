@@ -4,13 +4,13 @@ use std::fs::File;
 use std::io::Read;
 use std::ops::Add;
 
-pub struct JSON {}
+pub struct JsonCommons {}
 
 
-impl JSON {
+impl JsonCommons {
 
-    pub fn new() -> JSON {
-        return JSON {};
+    pub fn new() -> JsonCommons {
+        return JsonCommons {};
     }
 
     pub fn read_str(&self, content: &str) -> JsonValue {

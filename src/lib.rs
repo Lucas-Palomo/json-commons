@@ -1,14 +1,3 @@
 mod commons;
 
-use commons::json::JSON;
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub use commons::json::JsonCommons;
