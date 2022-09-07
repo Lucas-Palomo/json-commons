@@ -5,7 +5,7 @@ A set of JSON common tools in Rust
 
 ```rust
 
-use json_commons::JSON;
+use json_commons::JsonCommons;
 
 
 fn main() {
