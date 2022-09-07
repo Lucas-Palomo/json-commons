@@ -1,0 +1,13 @@
+[package]
+name = "json-commons"
+authors = ["Lucas Palomo <devlpalomo@gmail.com>"]
+version = "0.1.0"
+description = "A set of JSON common tools in Rust"
+repository = "https://github.com/Lucas-Palomo/json-commons"
+license = "Apache-2.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+json = "0.12.4"
