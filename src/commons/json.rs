@@ -2,7 +2,6 @@ use json::{JsonValue, parse};
 use std::collections::VecDeque;
 use std::fs::File;
 use std::io::Read;
-use std::ops::Add;
 
 pub struct JsonCommons {}
 
@@ -34,10 +33,32 @@ impl JsonCommons {
         }
 
         let key = keys.pop_front().unwrap();
-        let new_path = path.replace(&key.to_owned().add("."), "");
 
         if content.has_key(&key) && keys.len() > 0 {
-            return self.get_path(&new_path, content[&key].to_owned());
+            return if content[&key].is_array() {
+                let parse_index = keys.pop_front().unwrap().parse::<usize>();
+
+                match parse_index {
+                    Ok(index) => {
+                        let array = self.parse_to_vec(content[&key].to_owned());
+
+                        match array.get(index).cloned() {
+                            Some(object) => {
+                                let last_key = format!("{}.{}", &key, &index);
+                                return if keys.len() > 0 {
+                                    self.get_path(&self.gen_path(path.to_string(), last_key), object)
+                                } else {
+                                    return Some(object)
+                                }
+                            }
+                            None => None
+                        }
+                    },
+                    Err(_) => None
+                }
+            } else {
+                self.get_path(&self.gen_path(path.to_string(), key.to_owned()), content[&key].to_owned())
+            }
         }
 
         return if content.has_key(&key) {
@@ -61,5 +82,9 @@ impl JsonCommons {
             }
         }
         return vec;
+    }
+
+    fn gen_path(&self, path: String, last_key: String) -> String {
+        return path.replace(format!("{}.", last_key).as_str(), "");
     }
 }
