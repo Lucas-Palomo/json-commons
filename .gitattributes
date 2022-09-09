@@ -1,3 +1,3 @@
-*.rs linguist-language=rust
-*.json linguist-language=json
-*.toml linguist-language=toml
+*.rs linguist-language=Rust
+*.json linguist-language=Json
+*.toml linguist-language=Toml
